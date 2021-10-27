@@ -93,6 +93,7 @@
 		</div>`;
 	document.querySelector(".chat-content .message-container .message-content>.messages").prepend(firstBotMessageLi);
 	document.getElementById("sendMessageInput").addEventListener("keydown", (e) => {
+		if (!e.target.value.trim()) return;
 		if (e.key === "Enter") {
 			let message = document.createElement("li");
 			message.className = "chat-message";
@@ -114,6 +115,7 @@
 					</div>
 				</div>`;
 			document.querySelector(".chat-content .message-container .message-content>.messages .scrollerSpacer").before(message);
+			document.querySelector(".message-container").scrollTo(0, document.querySelector(".message-container").scrollHeight);
 			e.target.value = "";
 		}
 	});
