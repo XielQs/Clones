@@ -1,0 +1,25 @@
+{
+	"name": "discord_clone",
+	"version": "1.0.0",
+	"description": "Discord Clone By GamerboyTR",
+	"scripts": {
+		"build": "npx tailwindcss -i ./public/tailwind.css -c ./public/tailwind.config.js -o ./dist/css/style.css --minify",
+		"watch": "npx tailwindcss -i ./public/tailwind.css -c ./public/tailwind.config.js -o ./dist/css/style.css --minify -w"
+	},
+	"keywords": [
+		"discord",
+		"node",
+		"npm",
+		"clone",
+		"gamerboytr",
+		"tailwindcss",
+		"tailwind",
+		"css",
+		"html"
+	],
+	"author": "GamerboyTR",
+	"license": "MIT",
+	"dependencies": {
+		"tailwindcss": "^2.2.17"
+	}
+}
