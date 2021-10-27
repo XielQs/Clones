@@ -84,7 +84,7 @@
 					<span class="timestamp">
 						<time>
 							<i class="separator"> - </i>
-							10/27/2021
+							${new Date().getMonth() + 1 + "/" + new Date().getDate() + "/" + new Date().getFullYear()}
 						</time>
 					</span>
 				</h2>
@@ -92,9 +92,18 @@
 			</div>
 		</div>`;
 	document.querySelector(".chat-content .message-container .message-content>.messages").prepend(firstBotMessageLi);
+	document.getElementById("sendMessageInput").addEventListener("input", (e) => {
+		if (!e.target.value.trim()) return e.target.parentNode.removeAttribute("style");
+		let height = e.target.value.split("\n").length * 22 + 22;
+		if (height > 299) return;
+		if (e.target.value.match("\n")) e.target.parentNode.setAttribute("style", `height:${height}px!important`);
+	});
 	document.getElementById("sendMessageInput").addEventListener("keydown", (e) => {
 		if (!e.target.value.trim()) return;
+		if (e.shiftKey && e.key === "Enter") return;
 		if (e.key === "Enter") {
+			e.preventDefault();
+			e.target.parentNode.removeAttribute("style");
 			let message = document.createElement("li");
 			message.className = "chat-message";
 			message.innerHTML = `<div class="message">
@@ -107,7 +116,7 @@
 							<span class="timestamp">
 								<time>
 									<i class="separator"> - </i>
-									10/27/2021
+									${new Date().getMonth() + 1 + "/" + new Date().getDate() + "/" + new Date().getFullYear()}
 								</time>
 							</span>
 						</h2>
@@ -121,5 +130,61 @@
 	});
 	document.querySelector(".user-area .name-tag").addEventListener("click", () => {
 		navigator.clipboard.writeText(document.querySelector(".user-area .name-tag").innerText.replaceAll("\n", ""));
+	});
+
+	const toBase64 = (file) =>
+		new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = (error) => reject(error);
+		});
+
+	document.getElementById("uploadFile").addEventListener("click", () => {
+		window
+			.showOpenFilePicker({
+				types: [
+					{
+						description: "Images",
+						accept: {
+							"image/*": [".png", ".jpg", ".jpeg"],
+						},
+					},
+				],
+				excludeAcceptAllOption: true,
+				multiple: false,
+			})
+			.then(async (file) => {
+				let base64 = await toBase64(await file[0].getFile());
+				let input = document.getElementById("sendMessageInput");
+				let message = document.createElement("li");
+				message.className = "chat-message";
+				message.innerHTML = `<div class="message">
+					<div class="contents">
+						<img src="dist/img/discord_pfp2.png" class="user-avatar" />
+						<h2 class="header-message">
+							<span class="message-author">
+								<span class="username">???</span>
+							</span>
+							<span class="timestamp">
+								<time>
+									<i class="separator"> - </i>
+									${new Date().getMonth() + 1 + "/" + new Date().getDate() + "/" + new Date().getFullYear()}
+								</time>
+							</span>
+						</h2>
+						<div class="message-content image-content">
+							<img src="${base64}" />
+						</div>
+					</div>
+				</div>`;
+				document.querySelector(".chat-content .message-container .message-content>.messages .scrollerSpacer").before(message);
+				document.querySelector(".message-container").scrollTo(0, document.querySelector(".message-container").scrollHeight);
+				input.value = "";
+			})
+			.catch((err) => {
+				if (err.toString().match("The user aborted a request.")) return;
+				console.error(err);
+			});
 	});
 })();
