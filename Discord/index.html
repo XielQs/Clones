@@ -119,7 +119,7 @@
 							<div class="search-bar">
 								<button class="search-bar-component">Find or start a conversation</button>
 							</div>
-							<div id="private-channels" class="scrollThin scrollFade">
+							<div id="private-channels" class="scrollThin scrollAble scrollFade">
 								<div class="content">
 									<div class="h-2"></div>
 									<a class="channel">
@@ -410,14 +410,14 @@
 										<div class="input-container">
 											<div class="input-wrapper">
 												<div class="upload-file-wrapper">
-													<button aria-label="Upload a file or send invites">
+													<button aria-label="Upload a file or send invites" id="uploadFile">
 														<svg width="24" height="24" viewBox="0 0 24 24">
 															<path fill="currentColor" d="M12 2.00098C6.486 2.00098 2 6.48698 2 12.001C2 17.515 6.486 22.001 12 22.001C17.514 22.001 22 17.515 22 12.001C22 6.48698 17.514 2.00098 12 2.00098ZM17 13.001H13V17.001H11V13.001H7V11.001H11V7.00098H13V11.001H17V13.001Z" />
 														</svg>
 													</button>
 												</div>
-												<div class="textarea-input">
-													<input type="text" placeholder="Message @GamerboyTR" id="sendMessageInput" />
+												<div class="textarea-input h-11">
+													<textarea type="text" placeholder="Message @GamerboyTR" class="scrollAble scrollFade" id="sendMessageInput"></textarea>
 												</div>
 												<div class="buttons">
 													<button aria-label="Send a gift">

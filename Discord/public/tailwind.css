@@ -340,7 +340,7 @@ body {
 }
 
 #root .base > .content .chat-container .content .message-wrapper > .message-container {
-	@apply overflow-x-hidden overflow-y-scroll pr-0 absolute top-0 left-0 bottom-0 right-0 flex-auto min-h-0;
+	@apply overflow-x-hidden overflow-y-auto pr-0 absolute top-0 left-0 bottom-0 right-0 flex-auto min-h-0;
 	overflow-anchor: none;
 }
 
@@ -359,7 +359,7 @@ body {
 }
 
 #root .base > .content .chat-container .content .message-wrapper > .message-container > .message-content > ol.messages .chat-message > .message {
-	@apply mt-4 min-h-[2.75rem] pl-[72px] pt-[2px] pb-[2px] pr-12 relative break-words select-text;
+	@apply mt-4 min-h-[2.75rem] pl-[72px] pt-[2px] pb-[2px] pr-12 relative break-words select-text hover:bg-[#04040512];
 	flex: 0 0 auto;
 }
 
@@ -395,6 +395,15 @@ body {
 
 #root .base > .content .chat-container .content .message-wrapper > .message-container > .message-content > ol.messages .chat-message > .message > .contents .message-content {
 	@apply select-text ml-[-72px] pl-[72px] overflow-hidden relative text-base leading-5 break-words text-normal font-normal;
+	white-space: break-spaces;
+}
+
+#root .base > .content .chat-container .content .message-wrapper > .message-container > .message-content > ol.messages .chat-message > .message > .contents .message-content.image-content {
+	@apply block relative select-none overflow-hidden rounded;
+}
+
+#root .base > .content .chat-container .content .message-wrapper > .message-container > .message-content > ol.messages .chat-message > .message > .contents .message-content.image-content > img {
+	@apply max-w-[300px] max-h-[300px];
 }
 
 #root .base > .content .chat-container .content .chat-content {
@@ -434,11 +443,11 @@ body {
 }
 
 #root .base > .content .chat-container .content .chat-content .form > .form-container > .input-container > .input-wrapper .textarea-input {
-	@apply p-0 bg-transparent resize-none border-none appearance-none font-normal text-base leading-5 w-full h-11 min-h-[44px] text-normal relative;
+	@apply p-0 bg-transparent resize-none border-none appearance-none font-normal text-base leading-5 w-full min-h-[44px] !max-h-[299px] text-normal relative;
 }
 
-#root .base > .content .chat-container .content .chat-content .form > .form-container > .input-container > .input-wrapper .textarea-input > input {
-	@apply pb-3 pt-3 pr-3 left-0 whitespace-nowrap overflow-ellipsis overflow-hidden absolute right-0 select-none text-normal placeholder-muted w-full bg-transparent;
+#root .base > .content .chat-container .content .chat-content .form > .form-container > .input-container > .input-wrapper .textarea-input > #sendMessageInput {
+	@apply pb-3 pt-3 pr-3 whitespace-nowrap overflow-ellipsis select-none text-normal placeholder-muted w-full bg-transparent resize-none h-full;
 }
 
 #root .base > .content .chat-container .content .chat-content .form > .form-container > .input-container > .input-wrapper .buttons {
@@ -540,15 +549,7 @@ body {
 }
 
 .scrollThin::-webkit-scrollbar-thumb {
-	@apply bg-clip-padding border-transparent border-2 border-solid rounded bg-[#202225] min-h-[40px];
-}
-
-.scrollThin::-webkit-scrollbar-track {
-	@apply bg-transparent border-transparent border-2 border-solid;
-}
-
-.scrollThin::-webkit-scrollbar-corner {
-	@apply bg-transparent;
+	@apply min-h-[40px];
 }
 
 .scrollFade::-webkit-scrollbar-thumb,
@@ -559,6 +560,18 @@ body {
 .scrollFade:hover::-webkit-scrollbar-thumb,
 .scrollFade:hover::-webkit-scrollbar-track {
 	@apply visible;
+}
+
+.scrollAble::-webkit-scrollbar-thumb {
+	@apply bg-clip-padding border-transparent border-2 border-solid rounded bg-[#202225];
+}
+
+.scrollAble::-webkit-scrollbar-track {
+	@apply bg-transparent border-transparent border-2 border-solid;
+}
+
+.scrollAble::-webkit-scrollbar-corner {
+	@apply bg-transparent;
 }
 
 /*? End ScrollBars */
